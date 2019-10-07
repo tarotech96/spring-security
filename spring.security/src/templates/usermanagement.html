@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div>
+		<h1>#{title}</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Name/<th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Address</th>
+					<th>Action</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${listUser}">
+					<td>*{user.name}</td>
+					<td>*{user.email}</td>
+					<td>*{user.phone}</td>
+					<td>*{user.address}</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
