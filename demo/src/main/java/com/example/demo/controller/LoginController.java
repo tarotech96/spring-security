@@ -3,9 +3,15 @@
  */
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.entities.User;
+import com.example.demo.service.UserService;
 
 /**
  * @author nguye
@@ -13,12 +19,23 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
-@RequestMapping(value="/login")
+@RequestMapping(value = "")
 public class LoginController {
-	
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password) {	
-		System.out.println(username + "=========" + password);
-		return "redirect:home";
+
+	@Autowired
+	private UserService userService;
+
+	public LoginController(UserService userService) {
+		this.userService = userService;
 	}
-	
+
+	@RequestMapping(path = { "", "/login" })
+	public String login(HttpServletRequest request, Model model) {
+		User userLogin = userService.loginUserInfo();
+		if (userLogin != null) {
+			return "redirect:/home";
+		}
+		return "/login";
+	}
+
 }
